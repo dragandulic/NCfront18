@@ -6,6 +6,11 @@ import Proba from '@/components/proba'
 import Registration from '@/components/wellcome/registration'
 import Wellcome from '@/components/wellcome/wellcome'
 import Login from '@/components/wellcome/login'
+import Dashboard from '@/components/dashboard/dashboard'
+
+import VueCookie from "vue-cookie";
+// Tell Vue to use the plugin
+Vue.use(VueCookie);
 Vue.use(Router)
 
 export default new Router({
@@ -41,6 +46,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/dashboard',
+      name: 'dashborad',
+      component: Dashboard
     }
 
 

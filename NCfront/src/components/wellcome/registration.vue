@@ -9,8 +9,9 @@
         </div>
       </div>
 
-      <div class="row">
-          <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+      <div class="row ">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-6">
           <form >
            
             <hr class="colorgraph">
@@ -28,6 +29,13 @@
             </div>
             <div class="form-group">
                 <input type="email" v-model="user.email"  id="email" class="form-control input-lg" placeholder="Email Address" tabindex="4">
+            </div>
+            <div class="form-group">
+              <select class="form-control input-lg" @change="handleChange" id="exampleFormControlSelect1">
+                <option disabled selected>Select role</option>
+                <option value="1" data-foo="1">User</option>
+                <option value="2" data-foo="2">Author</option>
+              </select>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6">
@@ -56,12 +64,15 @@
             
             <p class="poruka">{{greska}}</p>
             <hr class="colorgraph">
-            <div class="row">
-              <div class="col-xs-12 col-md-6"><button v-on:click="registracija" class="btn btn-primary">Register</button></div>
-              <div class="col-xs-12 col-md-6"><router-link class="btn btn-success btn-block btn-lg" to="/login">Sign In</router-link></div>
-            </div>
+            
           </form>
+          <div class="row">
+            <div class="col-xs-12 col-md-6"><button v-on:click="registracija" class="btn btn-primary btn-block btn-lg">Register</button></div>
+            <div class="col-xs-12 col-md-6"><router-link class="btn btn-success btn-block btn-lg" to="/login">Sign In</router-link></div>
+          </div>
+
         </div>
+        <div class="col-sm-3"></div>
       </div>
 
 
@@ -90,12 +101,23 @@ import http from "../../router/http-common";
           country: "",
           city: "",
           password: "",
-          confirmpassword: ""
+          confirmpassword: "",
+          role: ""
         },
         greska: ""
       }
     },
     methods: {
+
+       handleChange(e) {
+        if(e.target.options.selectedIndex > -1) {
+            //console.log(e.target.options[e.target.options.selectedIndex].dataset.foo),
+            this.user.role = e.target.options[e.target.options.selectedIndex].dataset.foo
+        }
+      },
+
+
+
       registracija(){
         var data = {
           name: this.user.name,
@@ -105,10 +127,13 @@ import http from "../../router/http-common";
           country: this.user.country,
           email: this.user.email,
           password: this.user.password,
-          confirmpassword: this.user.confirmpassword
-
+          confirmpassword: this.user.confirmpassword,
+          roles : [
+		        {
+		        "id": this.user.role
+	      }]
         }
-        
+        console.log("ROLEEEEEEEEEEE " + this.user.role);
         http
           .post("/users/sign-up", data)
           .then(response => {
@@ -144,7 +169,10 @@ import http from "../../router/http-common";
 
 .poruka{
   font-size: 0.5cm;
-  color: red;
+  margin-left: 290px;
+  width: 300px;
 }
+
+
 
 </style>
