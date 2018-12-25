@@ -7,6 +7,7 @@ import Registration from '@/components/wellcome/registration'
 import Wellcome from '@/components/wellcome/wellcome'
 import Login from '@/components/wellcome/login'
 import Dashboard from '@/components/dashboard/dashboard'
+import Magazine from '@/components/dashboard/magazine'
 
 import VueCookie from "vue-cookie";
 // Tell Vue to use the plugin
@@ -20,11 +21,11 @@ export default new Router({
       name: 'Skills',
       component: Skills
     },
-    {
-      path: '/about/:name',
-      name: 'about',
-      component: About
-    },
+   // {
+    //  path: '/about/:name',
+      //name: 'about',
+     // component: About
+    //},
     {
       path: '/users/sign-up',
       name: 'users',
@@ -48,9 +49,13 @@ export default new Router({
       component: Login
     },
     {
-      path: '/dashboard',
-      name: 'dashborad',
-      component: Dashboard
+      path: '/dashboard', 
+      component: Dashboard,
+      children: [
+        { path: 'magazine', component: Magazine},
+        { path: 'skills', component: Skills}
+
+      ]
     }
 
 

@@ -111,7 +111,6 @@ import http from "../../router/http-common";
 
        handleChange(e) {
         if(e.target.options.selectedIndex > -1) {
-            //console.log(e.target.options[e.target.options.selectedIndex].dataset.foo),
             this.user.role = e.target.options[e.target.options.selectedIndex].dataset.foo
         }
       },
@@ -133,7 +132,7 @@ import http from "../../router/http-common";
 		        "id": this.user.role
 	      }]
         }
-        console.log("ROLEEEEEEEEEEE " + this.user.role);
+       
         http
           .post("/users/sign-up", data)
           .then(response => {

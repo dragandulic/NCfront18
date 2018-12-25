@@ -11,10 +11,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="dashboard.vue">Home <span class="sr-only">(current)</span></a>
+          <router-link class="nav-link" to="/dashboard/magazine">Magazine</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <router-link class="nav-link" to="/dashboard/skills">Skills</router-link>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,14 +32,14 @@
         </li>
       </ul>
         <div class="form-inline my-2 my-lg-0">
-        <button v-on:click="odjava" class="btn btn-outline-success my-2 my-sm-0">Logout</button>
+        <button v-on:click="odjava" class="btn btn-outline-light my-2 my-sm-0">Logout</button>
         </div>
       
 
     </div>
   </nav>
-
-  <button v-on:click="proba">Dugme</button>
+  <router-view></router-view>
+  <!--<button v-on:click="proba">Dugme</button>-->
  
 </div>
 
@@ -48,7 +48,7 @@
 <script lang="js">
 
 import http from '../../router/http-common.js'
-
+import axios from 'axios'
   export default  {
     name: 'dashboard',
     props: [],
@@ -63,7 +63,9 @@ import http from '../../router/http-common.js'
     methods: {
       odjava(){
         this.$cookie.delete('token')
+        //delete axios.defaults.headers.common["Authorization"]
         window.location.href= '/#/wellcome'
+
       },
 
 
@@ -85,7 +87,7 @@ import http from '../../router/http-common.js'
           .post("/users/loginn", user)
           .then(response => {
             
-              console.log("POGODIO " + this.$cookie.get('token'));
+              console.log("POGODIO ");
           })
           .catch(e => {
             console.log(e);
