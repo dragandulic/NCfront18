@@ -7,13 +7,6 @@
 </template>
 
 
-
-
-
-
-
-
-
 <script>
 import Skills from './components/Skills.vue'
 import About from './components/About.vue'
@@ -31,10 +24,6 @@ export default {
   }
 }
 </script>
-
-
-
-
 
 
 

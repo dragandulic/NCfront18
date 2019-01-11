@@ -63,7 +63,7 @@ import axios from 'axios'
     methods: {
       odjava(){
         this.$cookie.delete('token')
-        //delete axios.defaults.headers.common["Authorization"]
+        delete axios.defaults.headers.common["Authorization"]
         window.location.href= '/#/wellcome'
 
       },

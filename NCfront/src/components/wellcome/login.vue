@@ -65,11 +65,11 @@ import axios from "axios";
           .then(response =>{
             this.user.email="",
             this.user.password="",
-            this.$cookie.set('token', response.data.token, 1)
-            window.location.href= '/#/dashboard'
-            axios.defaults.headers = {
+            this.$cookie.set('token', response.data.token, 1) 
+            axios.defaults.headers.common = {
                 Authorization: 'Bearer ' + this.$cookie.get('token')
-          }  
+            }
+          window.location.href= '/#/dashboard'  
           })
           .catch(e=>{
             this.user.email="",

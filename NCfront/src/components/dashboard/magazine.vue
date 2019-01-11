@@ -32,6 +32,10 @@
     <div v-if="showw === true">
        <addlabor></addlabor>
     </div>
+    <div v-if="showw2 === true">
+        <p class="poruka">Membership fee is invalid! <br> Do you want to pay?</p>
+        <button v-on:click="payment()" style="margin-left: 400px;" type="button" class="btn btn-secondary">Pay</button>
+    </div>
   </div>
 </div>
 
@@ -49,26 +53,60 @@ import addlabor from "../labor/addlabor";
     },
     props: [],
     mounted() {
-
+      
     },
     data() {
       return {
         magazines: [],
-        showw: false
+        showw: false,
+        showw2: false,
+        idmagazina: null
       }
     },
     methods: {
 
-      addlabor(id){
-       
+      payment(){
+        console.log(this.idmagazina);
         http
-          .get("/magazine/checkmembershipfee/" + id)
+          .get("/paymentobj/paymentobjmembershipfee/" + this.idmagazina, {
+            headers: {
+              Authorization: 'Bearer ' + this.$cookie.get('token')
+            }
+          })
           .then(response =>{
-           if(response.data == "membershipfeetreu"){
+            console.log(response.data);
+            window.location.href = "http://localhost:3000/id=" + response.data; 
+            
+
+    
+          
+          })
+          .catch(e=> {
+            console.log(e);
+          })
+
+      },
+
+      addlabor(id){
+       this.idmagazina = id;
+        http
+          .get("/magazine/checkmembershipfee/" + id, {
+            headers: {
+              Authorization: 'Bearer ' + this.$cookie.get('token')
+            }
+          })
+          .then(response =>{
+           if(response.data == "membershipfeetrue"){
              this.showw = true;
            }
+           else if(response.data == "noopenaccess"){
+            this.showw = true;
+           }
+           else if(response.data == "membershipfeeinvalid"){
+            this.showw2 = true;
+           }
            else{
-             this.showw = false;
+             this.showw2 = true;
            }
           })
           .catch(e => {
@@ -77,9 +115,13 @@ import addlabor from "../labor/addlabor";
       },
 
       getUnits: function() {
-
+        
         http
-          .get("/magazine/listofmagazines")
+          .get("/magazine/listofmagazines", {
+            headers: {
+              Authorization: 'Bearer ' + this.$cookie.get('token')
+            }
+          })
           .then(response => {
             this.magazines = response.data;
           })
@@ -121,4 +163,11 @@ import addlabor from "../labor/addlabor";
   width: 45%;
   right: 0;
 }
+
+.poruka{
+  font-size: 35px;
+  margin-left: 50px;
+  margin-top: 50px;
+}
+
 </style>
