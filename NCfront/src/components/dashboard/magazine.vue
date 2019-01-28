@@ -68,7 +68,7 @@ import addlabor from "../labor/addlabor";
       payment(){
         console.log(this.idmagazina);
         http
-          .get("/paymentobj/paymentobjmembershipfee/" + this.idmagazina, {
+          .get("/paymentobject/createpaymentobject/" + this.idmagazina, {
             headers: {
               Authorization: 'Bearer ' + this.$cookie.get('token')
             }
