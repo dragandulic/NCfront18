@@ -75,7 +75,7 @@ import addlabor from "../labor/addlabor";
           })
           .then(response =>{
             console.log(response.data);
-            window.location.href = "http://localhost:3000/id=" + response.data; 
+            window.location.href = response.data; 
             
 
     
