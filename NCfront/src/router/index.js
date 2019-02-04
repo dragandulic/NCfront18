@@ -8,6 +8,7 @@ import Wellcome from '@/components/wellcome/wellcome'
 import Login from '@/components/wellcome/login'
 import Dashboard from '@/components/dashboard/dashboard'
 import Magazine from '@/components/dashboard/magazine'
+import Profile from '@/components/user/profile'
 
 import VueCookie from "vue-cookie";
 // Tell Vue to use the plugin
@@ -53,8 +54,8 @@ export default new Router({
       component: Dashboard,
       children: [
         { path: 'magazine', component: Magazine},
-        { path: 'skills', component: Skills}
-
+        { path: 'skills', component: Skills},
+        { path: 'profile', component: Profile}
       ]
     }
 

@@ -32,6 +32,12 @@
         </li>
       </ul>
         <div class="form-inline my-2 my-lg-0">
+         <!--   <router-link class="nav-link" to="/dashboard/magazine">  
+        <button class="btn btn-outline-light my-2 my-sm-0" style="margin-right: 20px;"><i  style="font-size:20px" class="fa fa-user-circle"></i></button>
+      </router-link>-->
+      <router-link  to="/dashboard/profile">
+      <button class="btn btn-outline-light my-2 my-sm-0" style="margin-right: 20px;"><i  style="font-size:20px" class="fa fa-user-circle"></i></button>
+    </router-link>
         <button v-on:click="odjava" class="btn btn-outline-light my-2 my-sm-0">Logout</button>
         </div>
       
@@ -40,7 +46,7 @@
   </nav>
   <router-view></router-view>
   <!--<button v-on:click="proba">Dugme</button>-->
- 
+  
 </div>
 
 </template>
