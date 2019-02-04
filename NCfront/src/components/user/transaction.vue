@@ -9,24 +9,25 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">First</th>
-                  <th scope="col">Last</th>
-                  <th scope="col">Handle</th>
+                  <th scope="col">Merchant</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Type</th>
+                  
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
+                <tr v-for="(trans,index) of transactionlist">
+                  <th scope="row">{{index+1}}</th>
+                  <td>{{trans.merchantmail}}</td>
+                  <td>{{trans.title}}</td>
+                  <td>{{trans.amount}} {{trans.currency}}</td>
+                  <td>{{trans.date}}</td>
+                  <td>{{trans.type}}</td>
+                  
                 </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
+                
                
               </tbody>
             </table>
@@ -43,18 +44,41 @@
 </template>
 
 <script lang="js">
+
+import http from "../../router/http-common";
+
   export default  {
     name: 'transaction',
     props: [],
     mounted() {
-
+      this.mytransaction();
     },
     data() {
       return {
-
+        transactionlist: []
       }
     },
     methods: {
+
+      mytransaction: function() {
+        
+        http
+          .get("/paymentobject/mytransaction", {
+            headers: {
+              Authorization: 'Bearer ' + this.$cookie.get('token')
+            }
+          })
+          .then(response => {
+            this.transactionlist = response.data;
+          })
+          .catch(e => {
+            console.log(e);
+          });
+
+      }
+
+
+
 
     },
     computed: {
