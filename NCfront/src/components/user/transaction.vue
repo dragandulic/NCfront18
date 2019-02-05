@@ -3,8 +3,8 @@
   <div>
     <h1 style="margin-left: 500px;margin-top: 20px;">My transaction</h1>
     <div class="row" style="height: 700px;">
-      <div class="col-sm-2" ></div>
-      <div class="col-sm-7" >
+      <div class="col-sm-1" ></div>
+      <div class="col-sm-8" >
           <table class="table table-striped" style="margin-top: 50px;">
               <thead>
                 <tr>

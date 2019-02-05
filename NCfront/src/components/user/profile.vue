@@ -13,7 +13,7 @@
               </div>
             </div>
 
-          <div class="row"  >
+          <div class="row" style="margin-top: 1px;" >
             <div class="col-sm-12">
                 <button style="width: 200px;" @click='transac = !transac' v-on:click="prikaz2()" class="btn btn-outline-primary my-2 my-sm-0">
                   <div ><i style="font-size:30px;" class="fa fa-money"></i></div>
