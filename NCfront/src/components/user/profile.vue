@@ -21,12 +21,21 @@
                 </button>
             </div>
           </div>
+
+          <div class="row" style="margin-top: 1px;" >
+            <div class="col-sm-12">
+                <button style="width: 200px;" @click='props = !props' v-on:click="prikaz3()" class="btn btn-outline-primary my-2 my-sm-0">
+                  <div ><i style="font-size:30px;" class="fa fa-cart-arrow-down"></i></div>
+                  Purchased props
+                </button>
+            </div>
+          </div>
       </div>
 
       <div class="split right">
         <div v-show='transac'><transaction></transaction></div>
         <div v-show='membershipf'><membershipfee></membershipfee></div>
-       
+        <div v-show='props'><purchasedprops></purchasedprops></div>
       </div>
       
 
@@ -38,12 +47,14 @@
 
 import transaction from "../user/transaction"; 
 import membershipfee from "../user/membershipfee"; 
+import purchasedprops from "../user/purchasedprops";
 
   export default  {
     name: 'profile',
     components: {
       transaction,
-      membershipfee
+      membershipfee,
+      purchasedprops
     },
     props: [],
     mounted() {
@@ -53,13 +64,20 @@ import membershipfee from "../user/membershipfee";
       return {
         transac: false,
         membershipf: false,
+        props: false,
       }
     },
     methods: {
       prikaz1(){
         this.transac = false;
+        this.props = false;
       },
       prikaz2(){
+        this.membershipf = false;
+        this.props = false;
+      },
+      prikaz3(){
+        this.transac = false;
         this.membershipf = false;
       }
     },

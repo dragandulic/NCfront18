@@ -9,7 +9,7 @@
             <li class="list-group-item " style="padding: 10px 10px;" v-for="(lab,index) of labors">{{lab.title}}
               <div class="row">
                 <div class="col-sm-12">
-                  <button class="btn btn-primary" v-on:click="payment('labor')" style="padding: 0px 7px;">{{lab.pricelabor}} EUR</button>
+                  <button class="btn btn-primary" v-on:click="payment(lab.id,'labor')" style="padding: 0px 7px;">{{lab.pricelabor}} EUR</button>
                   
                 </div>
               </div>
@@ -69,10 +69,10 @@ import http from "../../router/http-common";
           })
       },
 
-      payment(type){
+      payment(labid,type){
         console.log(this.idmag);
         http
-          .get("/paymentobject/createpaymentobject/" + this.idmag + "/" + type, {
+          .get("/paymentobject/createpaymentobject/" + labid + "/" + type, {
             headers: {
               Authorization: 'Bearer ' + this.$cookie.get('token')
             }
