@@ -34,7 +34,7 @@
                 <th scope="row">{{index+1}}</th>
                 <td>{{purchased.type}}</td>
                 <td>{{purchased.name}}</td>
-                <td> <a :href="purchased.downloadurl"  target='_blank'>dwonload</a>  </td>
+                <td> <a :href="purchased.downloadurl"  target='_blank'>download</a>  </td>
                 
                 
               </tr>

@@ -23,9 +23,29 @@
                 <td>{{mag.name}}</td>
                 <td>{{mag.issnnumber}}</td>
                 <td>{{mag.chifeditor}}</td>
-                <td><button class="btn btn-light" style="padding: 1px 7px;"  v-on:click="payment(mag.id,'magazine')">{{mag.amountmag}} EUR</button> </td>
+                <td>
+                  <div v-if="mag.type === 'noopenaccess'">
+                    <!--moram jos da proverim da li ima clanarinu za taj mag ili ne-->
+                    <div v-if="mag.activemembership === 'novalidmembershipf'">
+                        <button class="btn btn-light" style="padding: 1px 7px;"  v-on:click="payment(mag.id,'magazine')">
+                            {{mag.amountmag}} EUR
+                          </button>
+                    </div>
+                    <div v-else>
+                        <a :href="mag.urldownload"  target='_blank'>Download</a>
+                    </div>
+                  
+                  </div>
+                  <div v-else>
+                      <a :href="mag.urldownload"  target='_blank'>Download</a>
+                  </div>
+                </td>
                 <td><button class="btn btn-light" style="padding: 1px 7px;"  v-on:click="laborsli(mag.id)">Labors</button> </td>
-                <td v-on:click="addlabor(mag.id)" ><img src="../../assets/plus-math.png" title="Add labor" width="20px" height="20px" alt="Add labor" ></td>
+                <td >
+                  <div v-if="mag.userrole === 'AUTHOR'">                    
+                          <img v-on:click="addlabor(mag.id,mag.type,mag.activemembership)"  src="../../assets/plus-math.png" title="Add labor" width="20px" height="20px" alt="Add labor" >
+                  </div>
+                </td> 
               </tr>
             </tbody>
           </table>
@@ -114,9 +134,30 @@ import listlabor from "../labor/listlabor";
 
       },
 
-      addlabor(id){
-        this.show3 = false;
-       this.idmagazina = id;
+      addlabor(id,type,activemembershipfee){
+        this.idmagazina = id;
+        if(type == 'openaccess'){
+          if(activemembershipfee == 'validmembershipf'){
+            this.show3 = false;
+            this.showw2 = false;
+            this.showw = true;
+          }
+          else{
+            this.showw = false;
+            this.show3 = false;
+            this.showw2 = true;
+          }
+          
+        }else{
+          this.show3 = false;
+          this.showw2 = false;
+          this.showw = true;
+
+        }
+
+
+       /*this.show3 = false;
+       
         http
           .get("/magazine/checkmembershipfee/" + id, {
             headers: {
@@ -139,7 +180,7 @@ import listlabor from "../labor/listlabor";
           })
           .catch(e => {
             console.log(e);
-          });
+          });*/
       },
 
       getUnits: function() {
