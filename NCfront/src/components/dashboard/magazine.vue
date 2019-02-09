@@ -27,9 +27,14 @@
                   <div v-if="mag.type === 'noopenaccess'">
                     <!--moram jos da proverim da li ima clanarinu za taj mag ili ne-->
                     <div v-if="mag.activemembership === 'novalidmembershipf'">
-                        <button class="btn btn-light" style="padding: 1px 7px;"  v-on:click="payment(mag.id,'magazine')">
-                            {{mag.amountmag}} EUR
+                      <div v-if="mag.bought === 'yesbought'">
+                          <a :href="mag.urldownload"  target='_blank'>Download</a>
+                      </div>
+                      <div v-else>
+                          <button class="btn btn-light" style="padding: 1px 7px;"  v-on:click="payment(mag.id,'magazine')">
+                              {{mag.amountmag}} EUR
                           </button>
+                      </div>
                     </div>
                     <div v-else>
                         <a :href="mag.urldownload"  target='_blank'>Download</a>

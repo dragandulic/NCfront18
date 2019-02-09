@@ -14,7 +14,12 @@
                         <a style="font-size: 19px;" :href="lab.urldownload"  target='_blank'>Download</a> 
                     </div>
                     <div v-else>
-                        <button class="btn btn-primary" v-on:click="payment(lab.id,'labor')" style="padding: 0px 7px;">{{lab.pricelabor}} EUR</button>
+                      <div v-if="lab.bought === 'yesbought'">
+                          <a style="font-size: 19px;" :href="lab.urldownload"  target='_blank'>Download</a>
+                      </div>
+                      <div v-else>
+                          <button class="btn btn-primary" v-on:click="payment(lab.id,'labor')" style="padding: 0px 7px;">{{lab.pricelabor}} EUR</button>
+                      </div>
                     </div>
                   </div>
                   <div v-else>
