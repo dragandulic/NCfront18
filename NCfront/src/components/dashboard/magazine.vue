@@ -60,7 +60,7 @@
   <div class="split right">
       
     <div v-if="showw === true">
-       <addlabor></addlabor>
+       <addlabor :idmag="idmagazina"></addlabor>
     </div>
     <div v-if="showw2 === true">
         <p class="poruka">Membership fee is invalid! <br> Do you want to pay?</p>
