@@ -9,6 +9,10 @@
             <li class="list-group-item " style="padding: 10px 10px;" v-for="(lab,index) of labors">{{lab.title}}
               <div class="row" style="height: 28px;">
                 <div class="col-sm-12">
+                  <div v-if="lab.role === 'EDITOR'">
+                      <a style="font-size: 19px;" :href="lab.urldownload"  target='_blank'>Download</a> 
+                  </div>
+                  <div v-else>
                   <div v-if="lab.magazintype === 'noopenaccess'">
                     <div v-if="lab.activemembership === 'validmembershipf'">
                         <a style="font-size: 19px;" :href="lab.urldownload"  target='_blank'>Download</a> 
@@ -25,7 +29,7 @@
                   <div v-else>
                       <a style="font-size: 19px;" :href="lab.urldownload"  target='_blank'>Download</a> 
                   </div>
-                  
+                </div>
                 </div>
               </div>
             </li>

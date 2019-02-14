@@ -1,10 +1,13 @@
 <template lang="html">
 
   <div class="login">
-
+    
      <div class="container">
         <div class="row">
-          <div class="col-sm-4"></div>
+          <div class="col-sm-4">
+              <p>donthavename3478@gmail.com</p>
+              <p>isaisic1@gmail.com</p>
+          </div>
           <div class="col-sm-4 forma" >
             <h1 align="center">Sign In</h1>
               <form class="form-signin">

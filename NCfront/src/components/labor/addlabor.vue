@@ -7,7 +7,7 @@
     <div class="info" style="margin-bottom: 120px;">
       <div class="fildovi" >
         <label style="font-size: 21px;">Title of labor</label>
-        <input class="form-control" id="exampleFormControltitle1" type="text" placeholder="Title">
+        <input class="form-control" v-model="newLabor.laborname" id="exampleFormControltitle1" type="text" placeholder="Title">
         <br><hr>
         
         <div class="row" >
@@ -29,15 +29,15 @@
        </div>
        <br><hr>
        
-        <label style="margin-top: 0px; font-size: 21px;">Abstrast</label>
-        <textarea class="form-control" id="exampleFormControlabstract1" rows="2" placeholder="Abstrast"></textarea>
+        <label  style="margin-top: 0px; font-size: 21px;">Abstrast</label>
+        <textarea v-model="newLabor.abstractt" class="form-control" id="exampleFormControlabstract1" rows="2" placeholder="Abstrast"></textarea>
         <br><hr>
         
         <label style="margin-top: 0px; font-size: 21px;">Scientific area</label>
         <div class="form-group">
             <select class="form-control input-lg" @change="handleChange" id="exampleFormControlSelect1">
                 <option hidden selected>Select scientific area</option>
-                <option v-for="(sc,index) of scientificareas"  value="index+1" :data-fo1="sc.id">{{sc.name}} </option>
+                <option v-for="(sc,index) of scientificareas"  value="index+1" :data-foo="sc.id">{{sc.name}} </option>
             </select>
         </div>
         <br> <hr>
@@ -48,7 +48,7 @@
                 <label style="width: 200px; font-size: 21px;">PDF</label>          
             </div>
             <div class="col-sm-8">
-              <input   type="file"   >
+              <input type="file"  id="file" ref="file" v-on:change="handleFileUpload()"  >
             </div>
             <!--
             <div class="col-sm-2">
@@ -58,7 +58,7 @@
           <br> <hr>
           
 
-          <button class="btn btn-primary" style="margin-left: 550px; ">Submit</button>
+          <button class="btn btn-primary" style="margin-left: 550px; " v-on:click="addL()">Submit</button>
       </div>
     </div>
 
@@ -83,19 +83,86 @@ import http from "../../router/http-common";
     },
     data() {
       return {
+        file: '',
         keypoint: [],
         scientificareas: [],
         newLabor:{
-          scientificarea: "",
-
+          scientificareaid: null,
+          magazineid: null,
+          laborname: "",
+          abstractt: "",
+          keyterms: []
         }
       }
     },
     methods: {
 
+      handleFileUpload(){
+        this.file = this.$refs.file.files[0];
+      },
+
+      addL(){
+        var v = document.getElementById('file').value;
+
+        var data = {
+          scientificareaid: this.newLabor.scientificareaid,
+          magazineid: this.idmag,
+          laborname: this.newLabor.laborname,
+          abstractt: this.newLabor.abstractt,
+          keyterms: this.keypoint,
+          pdfname: v
+        }
+
+
+        http
+          //ovo zakomentarisano se koristi kada hoc da dodam u elasticsearch
+          //.post("/elasticsearch/addlabores", data, {
+            .post("/labor/addlabor", data, {
+            headers: {
+              Authorization: 'Bearer ' + this.$cookie.get('token')
+            }
+          })
+          .then(xresponse => {
+            this.newLabor.scientificareaid = null,
+            this.newLabor.magazineid = null,
+            this.newLabor.laborname = "",
+            this.newLabor.abstractt = "",
+            this.newLabor.keyterms = [],
+            this.keypoint = [];
+
+            //DODAVANJE PDF-a
+
+            let formData = new FormData();
+            formData.append('file', this.file);
+            http
+              .post("/labor/addpdfinlabor/" + xresponse.data, formData,{
+            headers: {
+              Authorization: 'Bearer ' + this.$cookie.get('token'),
+              'Content-Type': 'multipart/form-data'
+            }
+            })
+            .then(response =>{
+              
+            })
+            .catch(e=> {
+               console.log(e);
+            })
+
+
+          })
+          .catch(e => {
+            console.log(e);
+          });
+          this.submitted = true;
+         
+      },
+
+
+
+
     handleChange(e) {
         if(e.target.options.selectedIndex > -1) {
-            this.user.role = e.target.options[e.target.options.selectedIndex].dataset.foo
+            this.newLabor.scientificareaid = e.target.options[e.target.options.selectedIndex].dataset.foo
         }
       },
       

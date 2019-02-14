@@ -13,6 +13,10 @@
         <li class="nav-item active">
           <router-link class="nav-link" to="/dashboard/magazine">Magazine</router-link>
         </li>
+        <li class="nav-item active">
+            <router-link class="nav-link" to="/dashboard/search">Search</router-link>
+          </li>
+          <!--
         <li class="nav-item">
           <router-link class="nav-link" to="/dashboard/skills">Skills</router-link>
         </li>
@@ -30,6 +34,7 @@
         <li class="nav-item">
           <a class="nav-link disabled" href="#">Disabled</a>
         </li>
+      -->
       </ul>
         <div class="form-inline my-2 my-lg-0">
          <!--   <router-link class="nav-link" to="/dashboard/magazine">  

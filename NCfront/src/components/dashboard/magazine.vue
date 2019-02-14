@@ -24,6 +24,10 @@
                 <td>{{mag.issnnumber}}</td>
                 <td>{{mag.chifeditor}}</td>
                 <td>
+                  <div v-if="mag.userrole === 'EDITOR'">
+                      <a :href="mag.urldownload"  target='_blank'>Download</a>
+                  </div>
+                  <div v-else>
                   <div v-if="mag.type === 'noopenaccess'">
                     <!--moram jos da proverim da li ima clanarinu za taj mag ili ne-->
                     <div v-if="mag.activemembership === 'novalidmembershipf'">
@@ -44,6 +48,7 @@
                   <div v-else>
                       <a :href="mag.urldownload"  target='_blank'>Download</a>
                   </div>
+                </div>
                 </td>
                 <td><button class="btn btn-light" style="padding: 1px 7px;"  v-on:click="laborsli(mag.id)">Labors</button> </td>
                 <td >
