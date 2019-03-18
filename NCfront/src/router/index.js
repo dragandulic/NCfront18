@@ -10,6 +10,13 @@ import Dashboard from '@/components/dashboard/dashboard'
 import Magazine from '@/components/dashboard/magazine'
 import Profile from '@/components/user/profile'
 import Search from '@/components/dashboard/search'
+import Task from '@/components/task/mytasks'
+import AddLabor from '@/components/labor/addlabor'
+
+import AddLaborTask from '@/components/task/addLaborTask'
+import Reviewlabor from '@/components/task/reviewlabor'
+import ReviewPDF from '@/components/task/reviewpdf'
+
 
 import VueCookie from "vue-cookie";
 // Tell Vue to use the plugin
@@ -57,7 +64,11 @@ export default new Router({
         { path: 'magazine', component: Magazine},
         { path: 'search', component: Search},
         { path: 'skills', component: Skills},
-        { path: 'profile', component: Profile}
+        { path: 'profile', component: Profile},
+        { path: 'mytasks', component: Task},
+        { path: 'insertDataForLabor', component: AddLaborTask},
+        { path: 'reviewlabor', component: Reviewlabor},
+        { path: 'reviewpdf', component: ReviewPDF}
       ]
     }
 

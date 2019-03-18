@@ -63,9 +63,14 @@
   </div>
 
   <div class="split right">
-      
+      <!--
     <div v-if="showw === true">
        <addlabor :idmag="idmagazina"></addlabor>
+    </div>-->   
+    <div v-if="buttonAddLabor === true">
+       <button class="btn btn-dark" style="margin-left: 350px; margin-top: 130px;" >
+         <router-link class="nav-link" to="/dashboard/mytasks">Add labor</router-link>
+        </button>
     </div>
     <div v-if="showw2 === true">
         <p class="poruka">Membership fee is invalid! <br> Do you want to pay?</p>
@@ -102,6 +107,7 @@ import listlabor from "../labor/listlabor";
         showw: false,
         showw2: false,
         show3: false,
+        buttonAddLabor: false,
     
         idmagazina: null
       }
@@ -114,7 +120,8 @@ import listlabor from "../labor/listlabor";
         this.idmagazina = id,
         this.show3 = true,
         this.showw = false,
-        this.showw2 = false
+        this.showw2 = false,
+        this.buttonAddLabor = false
       },
 
 
@@ -146,23 +153,50 @@ import listlabor from "../labor/listlabor";
 
       addlabor(id,type,activemembershipfee){
         this.idmagazina = id;
+        http
+          .get("/magazine/startprocescamunda/" + this.idmagazina, {
+            headers: {
+              Authorization: 'Bearer ' + this.$cookie.get('token')
+            }
+          })
+          .then(response =>{
+            
+            if(response.data.status == "uspesno"){
+              localStorage.setItem('taskid', response.data.taksid);
+              //localStorage.setItem('odabraniMagazin', this.idmagazina);
+              this.show3 = false;
+              this.showw2 = false;
+              this.showw = false;
+              this.buttonAddLabor = true;
+            }
+            
+              
+          })
+          .catch(e=> {
+            console.log(e);
+          })
+
+
+        
         if(type == 'openaccess'){
           if(activemembershipfee == 'validmembershipf'){
             this.show3 = false;
             this.showw2 = false;
             this.showw = true;
+            this.buttonAddLabor = false;
           }
           else{
             this.showw = false;
             this.show3 = false;
             this.showw2 = true;
+            this.buttonAddLabor = false;
           }
           
         }else{
           this.show3 = false;
           this.showw2 = false;
           this.showw = true;
-
+          this.buttonAddLabor = false;
         }
 
 

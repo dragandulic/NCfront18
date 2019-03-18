@@ -1,10 +1,10 @@
 <template lang="html">
 
-  <div class="addlabor">
+  <div class="addlabor" >
 
     <h2 align="center">Add labor</h2>
 
-    <div class="info" style="margin-bottom: 120px;">
+    <div class="info" style="margin-bottom: 120px; margin-left: 500px; width: 800px;">
       <div class="fildovi" >
         <label style="font-size: 21px;">Title of labor</label>
         <input class="form-control" v-model="newLabor.laborname" id="exampleFormControltitle1" type="text" placeholder="Title">
@@ -76,7 +76,7 @@ import http from "../../router/http-common";
     mounted() {
 
       this.$watch('idmag', idmag => {
-        this.getscientificArea()
+        this.getscientificArea(localStorage.getItem('trenutniTaskId'))
       }, {immediate:true})
 
       
@@ -131,11 +131,11 @@ import http from "../../router/http-common";
             this.keypoint = [];
 
             //DODAVANJE PDF-a
-
+            
             let formData = new FormData();
             formData.append('file', this.file);
             http
-              .post("/labor/addpdfinlabor/" + xresponse.data, formData,{
+              .post("/labor/addpdfinlabor/" + xresponse.data + "/" + localStorage.getItem('procesId'), formData,{
             headers: {
               Authorization: 'Bearer ' + this.$cookie.get('token'),
               'Content-Type': 'multipart/form-data'
@@ -174,9 +174,9 @@ import http from "../../router/http-common";
       },
 
 
-      getscientificArea(){
+      getscientificArea(taskid){
         http
-          .get("/scientificarea/getscientificareao/" + this.idmag, {
+          .get("/scientificarea/getscientificareao/" + taskid, {
             headers: {
               Authorization: 'Bearer ' + this.$cookie.get('token')
             }

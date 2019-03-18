@@ -16,6 +16,9 @@
         <li class="nav-item active">
             <router-link class="nav-link" to="/dashboard/search">Search</router-link>
           </li>
+          <li class="nav-item active">
+            <router-link class="nav-link" to="/dashboard/mytasks">My tasks</router-link>
+          </li>
           <!--
         <li class="nav-item">
           <router-link class="nav-link" to="/dashboard/skills">Skills</router-link>
