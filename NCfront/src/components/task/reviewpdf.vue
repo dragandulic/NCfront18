@@ -11,16 +11,16 @@
            </div>
            <div class="row commentstil">
              <div class="col-sm-12">
-               <textarea cols="80" rows="3"></textarea>
+               <textarea cols="80" rows="3" v-model="comment" placeholder="Enter comment"></textarea>
              </div>
            </div>
            <div class="row commentstil">
              <div class="col-sm-5"></div>
              <div class="col-sm-2">
-               <button class="btn btn-primary">AAAAAAAA</button>
+               <button class="btn btn-primary" v-on:click="solve('accept')">Formatted</button>
              </div>
              <div class="col-sm-5" style="margin-left: 0px;">
-               <button class="btn btn-secondary">BBBBBBBB</button>
+               <button class="btn btn-secondary" v-on:click="solve('decline')">Not formatted</button>
              </div>
            </div>
       </div>
@@ -42,10 +42,31 @@ import http from '../../router/http-common'
     },
     data() {
       return {
-        urldownloadpdf: ''
+        urldownloadpdf: '',
+        comment: ''
       }
     },
     methods: {
+
+      solve(res){
+        var datau = {
+          name : "",
+          value : this.comment
+        }
+        http
+          .post('/task/completereviewpdf/' + localStorage.getItem('trenutniTaskId') + "/" + res, datau,{
+            headers: {
+              Authorization: 'Bearer ' + this.$cookie.get('token')
+            }
+          })
+          .then(response => {
+            alert("Task complete");
+            window.location.href = "http://localhost:8081/#/dashboard/mytasks";
+          })
+          .catch(e => {
+            console.log(e);
+          })
+      },
 
       getData(){
 

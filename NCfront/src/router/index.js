@@ -16,7 +16,8 @@ import AddLabor from '@/components/labor/addlabor'
 import AddLaborTask from '@/components/task/addLaborTask'
 import Reviewlabor from '@/components/task/reviewlabor'
 import ReviewPDF from '@/components/task/reviewpdf'
-
+import LaborNotFormatted from '@/components/task/labornotformatted'
+import ChooseReviewer from '@/components/task/choosereviewer'
 
 import VueCookie from "vue-cookie";
 // Tell Vue to use the plugin
@@ -68,7 +69,10 @@ export default new Router({
         { path: 'mytasks', component: Task},
         { path: 'insertDataForLabor', component: AddLaborTask},
         { path: 'reviewlabor', component: Reviewlabor},
-        { path: 'reviewpdf', component: ReviewPDF}
+        { path: 'reviewpdf', component: ReviewPDF},
+        { path: 'labornotformatted', component: LaborNotFormatted},
+        { path: 'choosereviewer', component: ChooseReviewer}
+        
       ]
     }
 
