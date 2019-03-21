@@ -114,7 +114,8 @@ import http from "../../router/http-common";
               }
             })
             .then(response => {
-             console.log("Vratio seee");
+              alert("Task complete");
+              window.location.href = "http://localhost:8081/#/dashboard/mytasks";
             })
             .catch(e=>{
               console.log(e);
